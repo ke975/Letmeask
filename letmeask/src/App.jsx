@@ -1,26 +1,25 @@
-import {createContext, useState} from 'react';
 
 
-import {BrowserRouter, Route} from 'react-router-dom'
-
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {Home} from './pages/Home'
 
 import {NewRoom} from './pages/NewRoom'
-
-export const TestContext= createContext({});
-
+import {AuthContextProvider} from './context/authContext'
+import {Room} from './pages/Room'
 
 function App() {
 
-const [value,setValue] = useState('Teste')
+
 
   return (
     <BrowserRouter>
-<TestContext.Provider value={{value, setValue}}>
-
+    <AuthContextProvider>
+      <Switch>
     <Route path="/" exact component={Home}/>
-    <Route path="/rooms/new"  component={NewRoom}/>
-    </TestContext.Provider>
+    <Route path="/rooms/new" component={NewRoom}/>
+    <Route path="/room/:id"  component={Room}/>
+    </Switch>
+    </AuthContextProvider>
     </BrowserRouter>
   );
 }
