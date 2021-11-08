@@ -54,7 +54,7 @@ history.push(`/room/${firebaseRoom.key}`)
 <main>
     <div className="main-content">
         <img src={logo} alt="Letmeask" />
-        <h1>{user?.name}</h1>
+       
             <h2>Criar uma nova sala</h2>
             <div className="separator">ou entre em uma sala</div>
             <form onSubmit={handleCreateRoom}>
