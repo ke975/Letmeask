@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { database } from "../services/firebase";
 import { Questions } from "../components/Questions";
 
-export function Room() {
+export function AdminRoom() {
   const [newQuestion, setNewQuestion] = useState("");
   const [questions, setQuestions] = useState([]);
   const [title, setTitle] = useState("");
@@ -32,6 +32,7 @@ export function Room() {
             author: value.author,
             isHighLihted: value.isHighLihted,
             isAnswered: value.isAnswered,
+            Answer: value.Answer,
           };
         }
       );
@@ -39,6 +40,11 @@ export function Room() {
       setQuestions(parseQuestion);
     });
   }, [roomId]);
+
+
+  
+ 
+
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -64,12 +70,20 @@ export function Room() {
     setNewQuestion("");
   }
 
+
+
+
   return (
     <div id="page-room">
       <header>
         <div className="content">
           <img src={Logo} alt="Logo letmeask" />
+
+          <div>
+
           <RoomCode code={roomId} />
+          <Button>Encerrar salas</Button>
+          </div>
         </div>
       </header>
 
@@ -99,7 +113,7 @@ export function Room() {
             )}
 
             <Button type="submit" disabled={!user}>
-              Enviar pregunta
+              Responder una pregunta
             </Button>
           </div>
 
@@ -111,24 +125,12 @@ export function Room() {
             {questions.map(question =>{
             return(
                 <Questions
-                
                 key={question.id}
                     content={question.content} 
-                    props={question.avatar}  
-                      
-                >
+                   author={question.avatar}  
+                 
 
-                  <button
-                  className="Like-button"
-                  type="button"
-                  aria-label="Marcar como guste"
-  
-                  >
-                      <span>10</span>
-                     
-                  </button>
-
-                  </Questions>
+                />
             )
         })}
             </div>
